@@ -202,7 +202,8 @@
             if (option.default) {
               // reduce price variable
               price -= option.price;
-
+            }
+          }
               const optionImage = thisProduct.imageWrapper.querySelector('.' + paramID + '-' + optionID);
               if(optionImage){
                 //yes! we've found it!
@@ -221,7 +222,7 @@
           }
         }
       }
-    }
-  }
+    
+  
   app.init();
 }
