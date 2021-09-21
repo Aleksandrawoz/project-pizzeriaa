@@ -39,13 +39,20 @@
       imageVisible: 'active',
 
     },
+    cart: {
+      wrapperActive: 'active',
+    },
   };
+
 
   const settings = {
     amountWidget: {
       defaultValue: 1,
       defaultMin: 1,
       defaultMax: 9,
+    },
+    cart: {
+      defaultDeliveryFee: 20,
     }
   };
 
@@ -99,6 +106,7 @@
       menuContainer.appendChild(thisProduct.element);
     }
 
+
     initAccordion() {
       const thisProduct = this;
       /* find the clickable trigger (the element that should react to clicking) */
@@ -109,26 +117,25 @@
       clickableTrigger.addEventListener('click', function (event) {
         /* prevent default action for event */
         event.preventDefault();
-        console.log('event.preventDefault');
-        /* find active product (product that has active class) */
-        const activeProducts = document.querySelectorAll(select.all.menuProductsActive);
-        console.log('activeProducts: ', activeProducts);
 
-        for (let activeProduct of activeProducts) {
-          /* if there is active product and it's not thisProduct.element, remove class active from it */
-          if (activeProduct != thisProduct.element) {
-            activeProduct.classList.remove('active');
-            console.log('usunięto klasę active');
+        /* find active product (product that has active class) */
+        const activeProduct = document.querySelectorAll(select.all.menuProductsActive);
+        console.log(activeProduct);
+
+        /* if there is active product and it's not thisProduct.element, remove class active from it */
+        for (let active of activeProduct) {
+          if (active !== thisProduct.element) {
+            active.classList.remove(classNames.menuProduct.wrapperActive);
           } else {
-            thisProduct.element.classList.add('active');
+            thisProduct.element.classList.add(classNames.menuProduct.wrapperActive);
           }
-          /* toggle active class on thisProduct.element */
-          thisProduct.element.classList.toggle('active');
         }
+        /* toggle active class on thisProduct.element */
+        thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
       });
     }
   }
+
+
   app.init();
 }
-
-
