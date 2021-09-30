@@ -145,7 +145,7 @@
 
 
       thisCart.initActions();
-      console.log('new Cart', thisCart);
+      console.log('new Cart:', thisCart);
     }
     getElements(element) {
       const thisCart = this;
@@ -174,8 +174,35 @@
 
       console.log('adding product', menuProduct);
 
+      thisCart.products.push(new CartProduct(menuProduct, menuContainer));
+      console.log('thisCart.products:', thisCart.products);
+    }
+  }
 
+  class CartProduct {
+    constructor(menuProduct, element) {
+      const thisCartProduct = this;
 
+      thisCartProduct.id = menuProduct.id;
+      thisCartProduct.name = menuProduct.name;
+      thisCartProduct.amount = menuProduct.amount;
+      thisCartProduct.priceSingle = menuProduct.priceSingle;
+      thisCartProduct.price = menuProduct.price;
+      thisCartProduct.params = menuProduct.params;
+
+      thisCartProduct.getElements(element);
+      console.log(thisCartProduct);
+    }
+    getElements(element) {
+      const thisCartProduct = this;
+
+      thisCartProduct.dom = {};
+
+      thisCartProduct.dom.wrapper = element;
+      thisCartProduct.dom.amountWidget = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.amountWidget);
+      thisCartProduct.dom.price = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.price);
+      thisCartProduct.dom.edit = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.edit);
+      thisCartProduct.dom.remove = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.remove);
     }
   }
   const app = {
@@ -210,6 +237,7 @@
       thisApp.cart = new Cart(cartElem);
     }
   };
+
   class Product {
     constructor(id, data) {
       const thisProduct = this;
@@ -375,7 +403,7 @@
       productSummary.amount = thisProduct.amountWidget.value;
       productSummary.priceSingle = thisProduct.priceSingle;
       productSummary.price = thisProduct.priceSingle * thisProduct.amountWidget.value;
-      productSummary.params = thisProduct.prepareCartProductParams;
+      productSummary.params = thisProduct.prepareCartProductParams();
 
       return productSummary;
     }
@@ -405,11 +433,13 @@
             params[paramID].options = option;
           }
         }
-      }
 
+      }
       return params;
     }
   }
+
+
 
   app.init();
 }
