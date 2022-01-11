@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { templates, select, settings } from './../settings.js';
 import AmountWidget from './AmountWidget.js';
 import utils from '../utils.js';
@@ -38,8 +39,6 @@ class Booking {
   }
 
   getData() {
-    
-    
     const thisBooking = this;
 
     const startDateParam = settings.db.dateStartParamKey + '=' + utils.dateToStr(thisBooking.datePicker.minDate);
@@ -89,12 +88,19 @@ class Booking {
           eventsRepeatResponse.json(),
         ]);
       })
-      
-      .then(function([bookings]){
-        console.log(bookings);
+
+      .then(function([bookings, eventsCurrent, eventsRepeat]){
+        //console.log(bookings);
+        //console.log( eventsCurrent);
+        //console.log(eventsRepeat);
+        thisBooking.parseData(bookings, eventsCurrent, eventsRepeat);
       });
     
     
+  }
+
+  parseData(_bookings, _eventsCurrent, _eventsRepeat){
+    const thisBooking = this;
   }
 }
 
