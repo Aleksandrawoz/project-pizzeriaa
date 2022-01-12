@@ -14,6 +14,7 @@ export const select = {
     menuProducts: '#product-list > .product',
     menuProductsActive: '#product-list > .product.active',
     formInputs: 'input, select',
+    selectedTables: '.selected',
   },
   menuProduct: {
     clickable: '.product__header',
@@ -43,6 +44,11 @@ export const select = {
     peopleAmount: '.people-amount',
     hoursAmount: '.hours-amount',
     tables: '.floor-plan .table',
+    floorPlan: '.floor-plan',
+    form: '.booking-form',
+    phone: '[name="phone"]',
+    address: '[name="address"]',
+    starters: '[name="starter"]'
   },
   nav: {
     links: '.main-nav a',
@@ -80,6 +86,7 @@ export const classNames = {
   booking: {
     loading: 'loading',
     tableBooked: 'booked',
+    tableSelected: 'selected',
   },
   nav: {
     active: 'active',
@@ -112,8 +119,8 @@ export const settings = {
     url: '//localhost:3131',
     products: 'products',
     orders: 'orders',
-    booking: 'booking',
-    event: 'event',
+    booking: 'bookings',
+    event: 'events',
     dateStartParamKey: 'date_gte',
     dateEndParamKey: 'date_lte',
     notRepeatParam: 'repeat=false',
