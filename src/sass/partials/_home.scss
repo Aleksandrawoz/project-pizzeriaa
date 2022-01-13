@@ -29,13 +29,11 @@
 .row {
   display: flex;
   flex-wrap: wrap;
-
 }
 
 .col {
   display: flex;
   flex-direction: column;
-
 }
 
 .flex-1 {
@@ -51,9 +49,6 @@
   margin-bottom: 30px;
   text-align: center;
 
-.row{
-    background-color:#ff6b6b;
-}
   a {
     color: $color-light;
     text-decoration: none;
@@ -69,7 +64,7 @@
 
 .opening-hours {
   height: 120px;
-  background: $color-main;
+  background-color: $color-main;
   color: $color-light;
   text-transform: uppercase;
   margin-top: 5px;
@@ -86,7 +81,6 @@
     margin: 0;
   }
 }
-
 
 .tile {
   height: 120px;
@@ -126,7 +120,7 @@
 }
 
 .flickity-prev-next-button {
-  display:inline-flex;
+  display: none;
 }
 
 .carousel {
@@ -141,7 +135,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 0px;
+    border-radius: 5px;
   }
 }
 
@@ -162,6 +156,9 @@
 
   p {
     font-size: 14px;
+  }
+
+  p:nth-child(3)  {
     font-style: italic;
   }
 }
@@ -221,4 +218,3 @@
 .footer a {
   color: $color-main;
 }
-

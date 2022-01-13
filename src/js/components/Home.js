@@ -28,7 +28,7 @@ class Home {
       // options
       cellAlign :'left',
       contain: true,
-      autoPlay: 1500,
+      
      
 
     });

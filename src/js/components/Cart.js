@@ -78,52 +78,50 @@ class Cart {
       body: JSON.stringify(payload),
     };
 
-    fetch(url, options);
+    fetch(url, options)
+      .then(function(response){
+        return response.json();
+      }).then(function(parsedResponse){
+        console.log('parsedResponse', parsedResponse);
+      });
   }
-
-  add(menuProduct) {
+  add(menuProduct){
     const thisCart = this;
 
     const generatedHTML = templates.cartProduct(menuProduct);
-    //console.log(generatedHTML);
+
     const generatedDOM = utils.createDOMFromHTML(generatedHTML);
-    //console.log(generatedDOM);
+
     thisCart.dom.productList.appendChild(generatedDOM);
 
-    //console.log('adding product', menuProduct);
     thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
     thisCart.update();
   }
 
-  update() {
+  update(){
     const thisCart = this;
 
     const deliveryFee = settings.cart.defaultDeliveryFee;
+
     thisCart.totalNumber = 0;
     thisCart.subtotalPrice = 0;
 
-    console.log(deliveryFee);
-
-    for (let product of thisCart.products) {
+    for(let product of thisCart.products){
       thisCart.totalNumber += product.amount;
-
       thisCart.subtotalPrice += product.price;
     }
-    if (thisCart.totalNumber !== 0) {
-      thisCart.totalPrice = thisCart.subtotalPrice + thisCart.deliveryFee;
-      // thisCart.dom.deliveryFee.innerHTML = deliveryFee;
-    } else {
-      thisCart.subtotalPrice = 0;
-      thisCart.deliveryFee = 0;
-    }
-    for (let price of thisCart.dom.totalPrice) {
-      price.innerHTML = thisCart.totalPrice;
-    }
+
     thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
     thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
-    thisCart.dom.totalPrice.innerHTML = thisCart.totalPrice;
 
-    //thisCart.dom.deliveryFee.innerHTML = deliveryFee;
+    if(thisCart.totalNumber == 0){
+      thisCart.dom.totalPrice.forEach(element => element.innerHTML = 0);
+      thisCart.dom.deliveryFee.innerHTML = 0;
+    } else {
+      thisCart.totalPrice = thisCart.subtotalPrice + deliveryFee;
+      thisCart.dom.deliveryFee.innerHTML = deliveryFee;
+      thisCart.dom.totalPrice.forEach(element => element.innerHTML = thisCart.totalPrice);
+    }
   }
 
   remove(cartProduct) {
@@ -131,9 +129,10 @@ class Cart {
 
     const indexOfProduct = thisCart.products.indexOf(cartProduct);
     thisCart.products.splice(indexOfProduct, 1);
+    
     cartProduct.dom.wrapper.remove();
-
     thisCart.update();
+    
   }
 }
 export default Cart;

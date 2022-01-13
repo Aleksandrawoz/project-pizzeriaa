@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+
 import { templates, select, settings, classNames } from './../settings.js';
 import AmountWidget from './AmountWidget.js';
 import utils from '../utils.js';
